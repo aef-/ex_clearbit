@@ -25,7 +25,7 @@ defmodule ExClearbit.Mixfile do
   end
 
   defp description do
-    "A light API wrapper for Clearbit"
+    "A lightweight API client for Clearbit"
   end
 
   defp package do
