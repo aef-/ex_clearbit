@@ -1,6 +1,6 @@
 defmodule ExClearbit do
   @moduledoc """
-  The base module for ExClearbit
+  The main module for ExClearbit
   """
   use Application
   use HTTPoison.Base

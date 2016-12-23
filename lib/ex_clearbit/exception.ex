@@ -1,7 +1,6 @@
 defmodule ExClearbit.Error do
+  @moduledoc """
+  Generic error thrown by the application
+  """
   defexception [:code, :message]
-end
-
-defmodule ExClearbit.ConnectionError do
-  defexception [:reason, message: "connection error"]
 end

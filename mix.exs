@@ -39,6 +39,7 @@ defmodule ExClearbit.Mixfile do
      {:credo, "~> 0.4", only: [:dev, :test]},
      {:poison, "~> 2.0"},
      {:inflex, "~> 1.7.0"},
-     {:exconstructor, "~> 1.0.2"}]
+     {:exconstructor, "~> 1.0.2"},
+     {:ex_doc, "~> 0.14", only: [:dev]}]
   end
 end
