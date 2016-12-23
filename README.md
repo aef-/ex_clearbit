@@ -42,6 +42,7 @@ iex> ExClearbit.person("alex@alexmaccaw.com")
 1. A test suite
 2. An interface for the streaming API
 3. A way to manage callbacks for asynchronous calls
+4. Other endpoints besides the Enrichment API
 
 ## CONTRIBUTING
 
