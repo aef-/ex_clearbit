@@ -4,15 +4,15 @@ defmodule ExClearbit.Mixfile do
   def project do
     [app: :ex_clearbit,
      version: "0.1.0",
+     name: "ExClearbit",
      elixir: "~> 1.3",
      description: description,
      package: package,
      docs: [main: "ExClearbit",
             extras: ["README.md"],
-            source_url: "https://github.com/adjust/airbax"],
+            source_url: "https://github.com/keithmattix/github"],
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
-     name: "ExClearbit",
      deps: deps]
   end
 
