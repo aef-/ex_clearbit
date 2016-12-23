@@ -4,7 +4,7 @@ defmodule ExClearbit do
   """
   use Application
   use HTTPoison.Base
-  alias ExClearbit.Model.Person
+  alias ExClearbit.Model.{Person, Company}
   @version Mix.Project.config[:version]
   def version, do: @version
 
@@ -27,7 +27,7 @@ defmodule ExClearbit do
   """
   @spec person(String.t, Keyword.t) :: Person.t
   def person(email, params \\ []) do
-    url "https://person.clearbit.com/v2/people/find"
+    url = "https://person.clearbit.com/v2/people/find"
     params = [email: email] ++ params
     response = ExClearbit.API.Base.get(url, [], params)
     if Map.has_key?(response, "error") do
@@ -44,7 +44,7 @@ defmodule ExClearbit do
   """
   @spec company(String.t, Keyword.t) :: Company.t
   def company(domain, params \\ []) do
-    url "https://company.clearbit.com/v2/companies/find"
+    url = "https://company.clearbit.com/v2/companies/find"
     params = [domain: domain] ++ params
     response = ExClearbit.API.Base.get(url, [], params)
     if Map.has_key?(response, "error") do
@@ -60,7 +60,7 @@ defmodule ExClearbit do
   Query the Clearbit Combined API by email
   """
   def combined(email, params \\ []) do
-    url "https://person.clearbit.com/v2/combined/find"
+    url = "https://person.clearbit.com/v2/combined/find"
     params = [email: email] ++ params
     response = ExClearbit.API.Base.get(url, [], params)
     if Map.has_key?(response, "error") do
