@@ -1,24 +1,33 @@
 # ExClearbit
 
-**TODO: Add description**
+Elixir client for [Clearbit](https://clearbit.com).
 
 ## Installation
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed as:
+First, add `ExClearbit` to your `mix.exs` file:
 
-  1. Add `ex_clearbit` to your list of dependencies in `mix.exs`:
+```elixir
+def deps do
+  [{:ex_clearbit, "~> 0.1.0"}]
+end
+```
 
-    ```elixir
-    def deps do
-      [{:ex_clearbit, "~> 0.1.0"}]
-    end
-    ```
+then run `$ mix deps.get`. Now add the `:ex_clearbit` application as your application dependency:
 
-  2. Ensure `ex_clearbit` is started before your application:
+```elixir
+def application do
+  [applications: [:ex_clearbit]]
+end
+```
 
-    ```elixir
-    def application do
-      [applications: [:ex_clearbit]]
-    end
-    ```
+## Usage
 
+```iex
+iex> ExClearbit.person("alex@alexmaccaw.com")
+```
+
+## TODO
+
+1. A test suite
+2. An interface for the streaming API
+3. A way to manage callbacks for asynchronous calls

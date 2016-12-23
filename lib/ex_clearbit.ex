@@ -23,7 +23,7 @@ defmodule ExClearbit do
   end
 
   @doc """
-    Query the Clearbit Person API by email
+  Query the Clearbit Person API by email
   """
   @spec person(String.t, Keyword.t) :: Person.t
   def person(email, params \\ []) do
@@ -39,6 +39,10 @@ defmodule ExClearbit do
     end
   end
 
+  @doc """
+  Query the Clearbit Company API by domain
+  """
+  @spec company(String.t, Keyword.t) :: Company.t
   def company(domain, params \\ []) do
     url "https://company.clearbit.com/v2/companies/find"
     params = [domain: domain] ++ params
@@ -52,6 +56,9 @@ defmodule ExClearbit do
     end
   end
 
+  @doc """
+  Query the Clearbit Combined API by email
+  """
   def combined(email, params \\ []) do
     url "https://person.clearbit.com/v2/combined/find"
     params = [email: email] ++ params
@@ -68,20 +75,23 @@ defmodule ExClearbit do
   end
 
   @doc """
-    Set ExClearbit configuration settings. This configuration will be applied gobally
+  Set ExClearbit configuration settings. This configuration will be applied gobally
   """
   defdelegate configure(config), to: ExClearbit.Config, as: :set
 
   @doc """
-    Set ExClearbit configuration settings. This configure will only be applied
-    for each individual process
+  Set ExClearbit configuration settings. This configure will only be applied
+  for each individual process
   """
   defdelegate configure(scope, config), to: ExClearbit.Config, as: :set
 
   @doc """
-    Retrieve current configuration values for ExClearbit
+  Retrieve current configuration values for ExClearbit
   """
   defdelegate configuration, to: ExClearbit.Config, as: :get
 
+  @doc """
+  Set a specific option manually in the ExClearbit configuration settings
+  """
   defdelegate set_option(key, value), to: ExClearbit.Config
 end

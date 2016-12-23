@@ -4,13 +4,15 @@ defmodule ExClearbit.Mixfile do
   def project do
     [app: :ex_clearbit,
      version: "0.1.0",
-     build_path: "../../_build",
-     config_path: "../../config/config.exs",
-     deps_path: "../../deps",
-     lockfile: "../../mix.lock",
      elixir: "~> 1.3",
+     description: description,
+     package: package,
+     docs: [main: "ExClearbit",
+            extras: ["README.md"],
+            source_url: "https://github.com/adjust/airbax"],
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
+     name: "ExClearbit",
      deps: deps]
   end
 
@@ -22,19 +24,16 @@ defmodule ExClearbit.Mixfile do
      mod: {ExClearbit, []}]
   end
 
-  # Dependencies can be Hex packages:
-  #
-  #   {:mydep, "~> 0.3.0"}
-  #
-  # Or git/path repositories:
-  #
-  #   {:mydep, git: "https://github.com/elixir-lang/mydep.git", tag: "0.1.0"}
-  #
-  # To depend on another app inside the umbrella:
-  #
-  #   {:myapp, in_umbrella: true}
-  #
-  # Type "mix help deps" for more examples and options
+  defp description do
+    "A light API wrapper for Clearbit"
+  end
+
+  defp package do
+    [maintainers: ["Keith Mattix II"],
+     licenses: ["MIT"],
+     links: %{"GitHub" => "https://github.com/keithmattix/ex_clearbit"}]
+  end
+
   defp deps do
     [{:httpoison, "~> 0.8.0"},
      {:credo, "~> 0.4", only: [:dev, :test]},
