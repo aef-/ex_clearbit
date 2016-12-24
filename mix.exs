@@ -3,7 +3,7 @@ defmodule ExClearbit.Mixfile do
 
   def project do
     [app: :ex_clearbit,
-     version: "0.1.0",
+     version: "0.1.1",
      name: "ExClearbit",
      elixir: "~> 1.3",
      description: description,
@@ -35,7 +35,7 @@ defmodule ExClearbit.Mixfile do
   end
 
   defp deps do
-    [{:httpoison, "~> 0.8.0"},
+    [{:httpoison, ">= 0.7.0"},
      {:credo, "~> 0.4", only: [:dev, :test]},
      {:poison, "~> 2.0"},
      {:inflex, "~> 1.7.0"},
