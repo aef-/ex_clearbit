@@ -3,9 +3,30 @@ defmodule ExClearbit.Model.Person do
     The struct for the Person data returned from Clearbit
   """
   @derive [Poison.Encoder]
-  defstruct [:id, :name, :gender, :location, :time_zone, :utc_offset, :geo, :bio, :site, :avatar,
-             :employment, :github, :facebook, :twitter, :linkedin, :googleplus, :angellist,
-             :aboutme, :gravatar, :fuzzy]
+  defstruct [
+    :aboutme,
+    :angellist,
+    :avatar,
+    :bio,
+    :email_provider,
+    :employment,
+    :facebook,
+    :fuzzy,
+    :gender,
+    :geo,
+    :github,
+    :googleplus,
+    :gravatar,
+    :id,
+    :indexed_at,
+    :linkedin,
+    :location,
+    :name,
+    :site,
+    :time_zone,
+    :twitter,
+    :utc_offset
+  ]
 
   @type t :: %__MODULE__{}
   use ExConstructor
@@ -16,10 +37,34 @@ defmodule ExClearbit.Model.Company do
   The struct for the Company data returned from Clearbit
   """
   @derive [Poison.Encoder]
-  defstruct [:id, :name, :legal_name, :domain, :domain_aliases, :site, :tags, :category, :category,
-             :description, :founded_year, :location, :time_zone, :utc_offset, :geo, :metrics,
-             :facebook, :twitter, :angel_list, :crunchbase, :logo, :email_provider, :type,
-             :phone, :tech, :indexedAt]
+  defstruct [
+    :angel_list,
+    :category,
+    :crunchbase,
+    :description,
+    :domain,
+    :domain_aliases,
+    :email_provider,
+    :facebook,
+    :founded_year,
+    :geo,
+    :id,
+    :indexed_at,
+    :legal_name,
+    :linkedin,
+    :location,
+    :logo,
+    :metrics,
+    :name,
+    :phone,
+    :site,
+    :tags,
+    :tech,
+    :time_zone,
+    :twitter,
+    :type,
+    :utc_offset
+ ]
 
   @type t :: %__MODULE__{}
   use ExConstructor
