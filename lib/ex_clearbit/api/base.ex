@@ -20,7 +20,7 @@ defmodule ExClearbit.API.Base do
   Makes a generic request to the Clearbit API
   """
   def request(method, path, body \\ "", headers \\ [], options \\ []) do
-    headers = Keyword.merge(default_headers, headers)
+    headers = Keyword.merge(default_headers(), headers)
     case Config.get_tuples |> verify_params do
       {:error, message} ->
         {:error, message}
@@ -33,7 +33,7 @@ defmodule ExClearbit.API.Base do
 
 
   defp default_headers do
-    ["Accept": "application/json", "Content-Type": "application/json"]
+    ["Accept": "application/json", "Content-Type": "application/json", "User-Agent": @user_agent]
   end
 
 

@@ -5,7 +5,7 @@ defmodule ExClearbit.Config do
   @doc """
     Set config values
   """
-  def set(value), do: set(current_scope, value)
+  def set(value), do: set(current_scope(), value)
   def set(:global, value), do: Application.put_env(:ex_clearbit, :config, value)
   def set(:process, value) do
     Process.put(:_ex_clearbit_config, value)
@@ -13,13 +13,13 @@ defmodule ExClearbit.Config do
   end
 
   def set_option(key, value) do
-    get |> Keyword.put(key, value) |> set
+    get() |> Keyword.put(key, value) |> set
   end
 
   @doc """
     Get config map
   """
-  def get, do: get(current_scope)
+  def get, do: get(current_scope())
   def get(:global) do
     Application.get_env(:ex_clearbit, :config, %{})
   end
@@ -28,7 +28,7 @@ defmodule ExClearbit.Config do
     Process.get(:_ex_clearbit_config, %{})
   end
 
-  def retrieve(key, default \\ nil, scope \\ current_scope) do
+  def retrieve(key, default \\ nil, scope \\ current_scope()) do
     scope
     |> get
     |> Keyword.get(key, default)
