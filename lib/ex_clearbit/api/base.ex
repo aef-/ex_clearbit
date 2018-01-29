@@ -10,7 +10,6 @@ defmodule ExClearbit.API.Base do
   Makes a GET request to the Clearbit API
   """
   def get(path \\ "", headers \\ [], params \\ [], options \\ []) do
-    params = params |> Enum.map(fn({key, value}) -> {key |> Inflex.camelize(:lower), value} end)
     options = options ++ [params: params]
     :get |> request(path, "", headers, options) |> Map.get(:body)
   end
