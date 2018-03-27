@@ -5,7 +5,7 @@ defmodule ExClearbit.Mixfile do
     [app: :ex_clearbit,
      version: "0.1.3",
      name: "ExClearbit",
-     elixir: "~> 1.3",
+     elixir: "~> 1.5",
      description: description(),
      package: package(),
      docs: [main: "ExClearbit",
