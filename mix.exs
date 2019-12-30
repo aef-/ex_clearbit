@@ -5,7 +5,7 @@ defmodule ExClearbit.Mixfile do
     [app: :ex_clearbit,
      version: "0.1.3",
      name: "ExClearbit",
-     elixir: "~> 1.5",
+     elixir: "~> 1.9.2",
      description: description(),
      package: package(),
      docs: [main: "ExClearbit",
@@ -37,7 +37,7 @@ defmodule ExClearbit.Mixfile do
   defp deps do
     [{:httpoison, "~> 1.0"},
      {:credo, "~> 0.8", only: [:dev, :test]},
-     {:poison, "~> 3.0"},
+     {:poison, "~> 4.0"},
      {:exconstructor, "~> 1.1"},
      {:ex_doc, "~> 0.18", only: [:dev]}]
   end
