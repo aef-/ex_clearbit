@@ -32,6 +32,21 @@ defmodule ExClearbit.Model.Person do
   use ExConstructor
 end
 
+defmodule ExClearbit.Model.NameToDomain do
+  @moduledoc """
+    The struct for the NameToDomain data returned from Clearbit
+  """
+  @derive [Poison.Encoder]
+  defstruct [
+    :domain,
+    :logo,
+    :name
+  ]
+
+  @type t :: %__MODULE__{}
+  use ExConstructor
+end
+
 defmodule ExClearbit.Model.Company do
   @moduledoc """
   The struct for the Company data returned from Clearbit

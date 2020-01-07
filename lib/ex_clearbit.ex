@@ -4,7 +4,7 @@ defmodule ExClearbit do
   """
   use Application
   use HTTPoison.Base
-  alias ExClearbit.Model.{Person, Company}
+  alias ExClearbit.Model.{Person, Company, NameToDomain}
   @version Mix.Project.config[:version]
   def version, do: @version
 
@@ -53,6 +53,24 @@ defmodule ExClearbit do
       {:error, %{code: type, message: message}}
     else
       response |> Company.new
+    end
+  end
+
+  @doc """
+  Query the Clearbit NameToDomain API by name
+  """
+  @spec name_to_domain(String.t(), Keyword.t()) :: NameToDomain.t()
+  def name_to_domain(name, params \\ []) do
+    url = "https://company.clearbit.com/v1/domains/find"
+    params = [name: name] ++ params
+    response = ExClearbit.API.Base.get(url, [], params)
+
+    if Map.has_key?(response, "error") do
+      message = response["error"]["message"]
+      type = response["error"]["type"] |> String.to_atom()
+      {:error, %{code: type, message: message}}
+    else
+      response |> NameToDomain.new()
     end
   end
 
