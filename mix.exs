@@ -3,7 +3,7 @@ defmodule ExClearbit.Mixfile do
 
   def project do
     [app: :ex_clearbit,
-     version: "0.2.0",
+     version: "0.2.1",
      name: "ExClearbit",
      elixir: "~> 1.9.2",
      description: description(),
