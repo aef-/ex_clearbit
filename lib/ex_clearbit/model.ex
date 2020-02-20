@@ -84,3 +84,46 @@ defmodule ExClearbit.Model.Company do
   @type t :: %__MODULE__{}
   use ExConstructor
 end
+
+defmodule ExClearbit.Model.Prospector.Person do
+  @moduledoc """
+  Struct for each Prospect person result from Clearbit
+  """
+  @derive [Poison.Encoder]
+  defstruct [
+    :id,
+    :name,
+    :title,
+    :role,
+    :sub_role,
+    :seniority,
+    :company,
+    :email,
+    :verified,
+    :phone,
+  ]
+
+  @type t :: %__MODULE__{}
+  use ExConstructor
+end
+
+defmodule ExClearbit.Model.Prospector.Results do
+  @moduledoc """
+  Struct for containing list of prospect results from Clearbit
+  """
+  @derive [Poison.Encoder]
+  defstruct [
+    :page,
+    :page_size,
+    :total,
+    :results,
+  ]
+
+  @type t :: %__MODULE__{
+    page: non_neg_integer,
+    page_size: non_neg_integer,
+    total: non_neg_integer,
+    results: list(ExClearbit.Model.Prospector.Person.t)
+  }
+  use ExConstructor
+end
