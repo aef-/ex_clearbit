@@ -3,7 +3,7 @@ defmodule ExClearbit.Mixfile do
 
   def project do
     [app: :ex_clearbit,
-     version: "0.1.3",
+     version: "0.2.0",
      name: "ExClearbit",
      elixir: "~> 1.9.2",
      description: description(),
@@ -39,6 +39,6 @@ defmodule ExClearbit.Mixfile do
      {:credo, "~> 0.8", only: [:dev, :test]},
      {:poison, "~> 4.0"},
      {:exconstructor, "~> 1.1"},
-     {:ex_doc, "~> 0.18", only: [:dev]}]
+     {:ex_doc, "~> 0.19", only: [:dev]}]
   end
 end
