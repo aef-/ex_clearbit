@@ -17,3 +17,6 @@ erl_crash.dump
 *.ez
 
 priv/repo/seeds.exs
+
+.vscode/
+.elixir_ls/
