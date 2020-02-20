@@ -2,7 +2,7 @@ defmodule ExClearbit do
   use Application
   use HTTPoison.Base
 
-  alias ExClearbit.Model.{Person, Company, NameToDomain}
+  alias ExClearbit.Model.{Person, Company, NameToDomain, Prospector}
   alias ExClearbit.API
 
   @moduledoc """
@@ -87,6 +87,25 @@ defmodule ExClearbit do
       company = Company.new(response["company"])
 
       {:ok, %{person: person, company: company}}
+    end
+  end
+
+
+  @doc """
+  Query the Clearbit Prospector Search API
+  """
+  @url "https://prospector.clearbit.com/v1/people/search"
+  @spec prospector_search(String.t, Keyword.t) :: {:ok, Prospector.Results.t} | error
+  def prospector_search(domain, params \\ []) do
+    params = [domain: domain] ++ params
+
+    with {:ok, response} <- API.Base.get(@url, [], params) do
+      results =
+        response
+        |> Prospector.Results.new()
+        |> Map.update!(:results, &Enum.map(&1, fn p -> Prospector.Person.new(p) end))
+
+      {:ok, results}
     end
   end
 
