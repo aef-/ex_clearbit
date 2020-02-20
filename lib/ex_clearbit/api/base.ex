@@ -5,13 +5,19 @@ defmodule ExClearbit.API.Base do
   alias ExClearbit.Config
 
   @user_agent "Clearbit Elixir Client/#{ExClearbit.version}"
+  @default_headers ["Accept": "application/json", "Content-Type": "application/json", "User-Agent": @user_agent]
 
   @doc """
   Makes a GET request to the Clearbit API
   """
   def get(path \\ "", headers \\ [], params \\ [], options \\ []) do
     options = options ++ [params: params]
-    :get |> request(path, "", headers, options) |> Map.get(:body)
+
+    with {:ok, response} <- request(:get, path, "", headers, options),
+         {:ok, body} <- Map.fetch(response, :body),
+         :ok <- handle_errors(body) do
+      {:ok, body}
+    end
   end
 
 
@@ -19,20 +25,22 @@ defmodule ExClearbit.API.Base do
   Makes a generic request to the Clearbit API
   """
   def request(method, path, body \\ "", headers \\ [], options \\ []) do
-    headers = Keyword.merge(default_headers(), headers)
-    case Config.get_tuples |> verify_params do
+    headers = Keyword.merge(@default_headers, headers)
+
+    Config.get_tuples()
+    |> verify_params()
+    |> case do
       {:error, message} ->
         {:error, message}
+
       config ->
         options =
-          Keyword.merge(config, options) ++ [hackney: [basic_auth: {config[:api_key], nil}]]
-        ExClearbit.request!(method, path, body, headers, options)
+          config
+          |> Keyword.merge(options)
+          |> Keyword.merge(hackney: [basic_auth: {config[:api_key], nil}])
+
+      ExClearbit.request(method, path, body, headers, options)
     end
-  end
-
-
-  defp default_headers do
-    ["Accept": "application/json", "Content-Type": "application/json", "User-Agent": @user_agent]
   end
 
 
@@ -46,4 +54,12 @@ defmodule ExClearbit.API.Base do
   end
 
   def verify_params(params), do: params
+
+
+  # Returns error tuple in case of errors, otherwise returns the response as-is
+  defp handle_errors(%{"error" => error}) do
+    {:error, %{code: String.to_atom(error["type"]), message: error["message"]}}
+  end
+
+  defp handle_errors(%{} = _response), do: :ok
 end

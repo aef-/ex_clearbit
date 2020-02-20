@@ -1,12 +1,20 @@
 defmodule ExClearbit do
+  use Application
+  use HTTPoison.Base
+
+  alias ExClearbit.Model.{Person, Company, NameToDomain}
+  alias ExClearbit.API
+
   @moduledoc """
   The main module for ExClearbit
   """
-  use Application
-  use HTTPoison.Base
-  alias ExClearbit.Model.{Person, Company, NameToDomain}
+
+  @type error :: {:error, %{code: atom, message: String.t}}
+
+
   @version Mix.Project.config[:version]
   def version, do: @version
+
 
   def start(_type, _args) do
     import Supervisor.Spec, warn: false
@@ -18,79 +26,70 @@ defmodule ExClearbit do
     Supervisor.start_link(children, opts)
   end
 
+
   def process_response_body(body) do
-    body |> Poison.decode!
+    Poison.decode!(body)
   end
+
 
   @doc """
   Query the Clearbit Person API by email
   """
-  @spec person(String.t, Keyword.t) :: Person.t
+  @url "https://person.clearbit.com/v2/people/find"
+  @spec person(String.t, Keyword.t) :: {:ok, Person.t} | error
   def person(email, params \\ []) do
-    url = "https://person.clearbit.com/v2/people/find"
     params = [email: email] ++ params
-    response = ExClearbit.API.Base.get(url, [], params)
-    if Map.has_key?(response, "error") do
-      message = response["error"]["message"]
-      type = response["error"]["type"] |> String.to_atom
-      {:error, %{code: type, message: message}}
-    else
-      response |> Person.new
+
+    with {:ok, response} <- API.Base.get(@url, [], params) do
+      {:ok, Person.new(response)}
     end
   end
+
 
   @doc """
   Query the Clearbit Company API by domain
   """
-  @spec company(String.t, Keyword.t) :: Company.t
+  @url "https://company.clearbit.com/v2/companies/find"
+  @spec company(String.t, Keyword.t) :: {:ok, Company.t} | error
   def company(domain, params \\ []) do
-    url = "https://company.clearbit.com/v2/companies/find"
     params = [domain: domain] ++ params
-    response = ExClearbit.API.Base.get(url, [], params)
-    if Map.has_key?(response, "error") do
-      message = response["error"]["message"]
-      type = response["error"]["type"] |> String.to_atom
-      {:error, %{code: type, message: message}}
-    else
-      response |> Company.new
+
+    with {:ok, response} <- API.Base.get(@url, [], params) do
+      {:ok, Company.new(response)}
     end
   end
+
 
   @doc """
   Query the Clearbit NameToDomain API by name
   """
-  @spec name_to_domain(String.t(), Keyword.t()) :: NameToDomain.t()
+  @url "https://company.clearbit.com/v1/domains/find"
+  @spec name_to_domain(String.t, Keyword.t) :: {:ok, NameToDomain.t} | error
   def name_to_domain(name, params \\ []) do
-    url = "https://company.clearbit.com/v1/domains/find"
     params = [name: name] ++ params
-    response = ExClearbit.API.Base.get(url, [], params)
 
-    if Map.has_key?(response, "error") do
-      message = response["error"]["message"]
-      type = response["error"]["type"] |> String.to_atom()
-      {:error, %{code: type, message: message}}
-    else
-      response |> NameToDomain.new()
+    with {:ok, response} <- API.Base.get(@url, [], params) do
+      {:ok, NameToDomain.new(response)}
     end
   end
+
 
   @doc """
   Query the Clearbit Combined API by email
   """
+  @url "https://person.clearbit.com/v2/combined/find"
+  @spec combined(String.t, Keyword.t) :: {:ok, %{person: Person.t, company: Company.t}} | error
   def combined(email, params \\ []) do
-    url = "https://person.clearbit.com/v2/combined/find"
     params = [email: email] ++ params
-    response = ExClearbit.API.Base.get(url, [], params)
-    if Map.has_key?(response, "error") do
-      message = response["error"]["message"]
-      type = response["error"]["type"] |> String.to_atom
-      {:error, %{code: type, message: message}}
-    else
-      person = response["person"] |> Person.new
-      company = response["company"] |> Company.new
-      %{person: person, company: company}
+
+    with {:ok, response} <- API.Base.get(@url, [], params) do
+      person = Person.new(response["person"])
+      company = Company.new(response["company"])
+
+      {:ok, %{person: person, company: company}}
     end
   end
+
 
   @doc """
   Set ExClearbit configuration settings. This configuration will be applied gobally
