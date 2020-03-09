@@ -111,7 +111,7 @@ defmodule ExClearbit do
 
 
   @doc """
-  Query the Clearbit Prospector Search API
+  Query the Clearbit Reveal API
   """
   @url "https://reveal.clearbit.com/v1/companies/find"
   @spec reveal_ip(String.t) :: {:ok, Reveal.t} | error
