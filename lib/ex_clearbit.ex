@@ -2,7 +2,7 @@ defmodule ExClearbit do
   use Application
   use HTTPoison.Base
 
-  alias ExClearbit.Model.{Person, Company, NameToDomain, Prospector}
+  alias ExClearbit.Model.{Person, Company, NameToDomain, Prospector, Reveal}
   alias ExClearbit.API
 
   @moduledoc """
@@ -106,6 +106,27 @@ defmodule ExClearbit do
         |> Map.update!(:results, &Enum.map(&1, fn p -> Prospector.Person.new(p) end))
 
       {:ok, results}
+    end
+  end
+
+
+  @doc """
+  Query the Clearbit Prospector Search API
+  """
+  @url "https://reveal.clearbit.com/v1/companies/find"
+  @spec reveal_ip(String.t) :: {:ok, Reveal.t} | error
+  def reveal_ip(ip_address) do
+    with {:ok, response} <- API.Base.get(@url, [], [ip: ip_address]) do
+      result =
+        response
+        |> Map.put_new("geo_ip", response["geoIP"])
+        |> Reveal.new()
+        |> Map.update!(:company, fn
+          nil -> nil
+          %{} = map -> Company.new(map)
+        end)
+
+      {:ok, result}
     end
   end
 

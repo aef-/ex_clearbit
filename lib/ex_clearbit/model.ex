@@ -127,3 +127,28 @@ defmodule ExClearbit.Model.Prospector.Results do
   }
   use ExConstructor
 end
+
+defmodule ExClearbit.Model.Reveal do
+  @moduledoc """
+  Struct for company retrieved by the Reveal API
+  """
+  @derive [Poison.Encoder]
+  defstruct [
+    :ip,
+    :fuzzy,
+    :domain,
+    :type,
+    :company,
+    :geo_ip,
+  ]
+
+  @type t :: %__MODULE__{
+    ip: binary,
+    fuzzy: boolean,
+    domain: binary | nil,
+    type: binary,
+    geo_ip: map,
+    company: ExClearbit.Model.Company.t | nil,
+  }
+  use ExConstructor
+end
