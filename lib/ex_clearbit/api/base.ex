@@ -62,4 +62,5 @@ defmodule ExClearbit.API.Base do
   end
 
   defp handle_errors(%{} = _response), do: :ok
+  defp handle_errors([_|_] = _response), do: :ok
 end

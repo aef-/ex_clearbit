@@ -130,6 +130,20 @@ defmodule ExClearbit do
     end
   end
 
+  
+  @doc """
+  Query the Clearbit Autocomplete API by name
+  """
+  @url "https://autocomplete.clearbit.com/v1/companies/suggest"
+  @spec autocomplete(String.t, Keyword.t) :: {:ok, Company.t} | error
+  def autocomplete(query, params \\ []) do
+    params = [query: query] ++ params
+
+    with {:ok, response} <- API.Base.get(@url, [], params) do
+      {:ok, Enum.map(response, &Company.new/1)}
+    end
+  end
+
 
   @doc """
   Set ExClearbit configuration settings. This configuration will be applied gobally
