@@ -1,12 +1,14 @@
 defmodule ExClearbit.Config do
   def current_scope do
-     if Process.get(:_ex_clearbit_config, nil), do: :process, else: :global
-   end
+    if Process.get(:_ex_clearbit_config, nil), do: :process, else: :global
+  end
+
   @doc """
     Set config values
   """
   def set(value), do: set(current_scope(), value)
   def set(:global, value), do: Application.put_env(:ex_clearbit, :config, value)
+
   def set(:process, value) do
     Process.put(:_ex_clearbit_config, value)
     :ok
@@ -20,6 +22,7 @@ defmodule ExClearbit.Config do
     Get config map
   """
   def get, do: get(current_scope())
+
   def get(:global) do
     Application.get_env(:ex_clearbit, :config, %{})
   end
@@ -35,9 +38,9 @@ defmodule ExClearbit.Config do
   end
 
   def get_tuples do
-    case ExClearbit.Config.get do
+    case ExClearbit.Config.get() do
       nil -> []
-      tuples -> tuples |> Enum.map(fn {k,v} -> {k, to_string(v)} end)
+      tuples -> tuples |> Enum.map(fn {k, v} -> {k, to_string(v)} end)
     end
   end
 end
