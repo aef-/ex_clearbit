@@ -1,10 +1,10 @@
 # ExClearbit
 
 [![Elixir CI](https://github.com/aef-/ex_clearbit/actions/workflows/elixir.yml/badge.svg)](https://github.com/aef-/ex_clearbit/actions/workflows/elixir.yml)
-[![Module Version](https://img.shields.io/hexpm/v/slack.svg)](https://hex.pm/packages/slack)
-[![Hex Docs](https://img.shields.io/badge/hex-docs-lightgreen.svg)](https://hexdocs.pm/slack/)
-[![Total Download](https://img.shields.io/hexpm/dt/slack.svg)](https://hex.pm/packages/slack)
-[![License](https://img.shields.io/hexpm/l/slack.svg)](https://github.com/aef-/ex_clearbit/blob/main/LICENSE.md)
+[![Module Version](https://img.shields.io/hexpm/v/ex_clearbit.svg)](https://hex.pm/packages/ex_clearbit)
+[![Hex Docs](https://img.shields.io/badge/hex-docs-lightgreen.svg)](https://hexdocs.pm/ex_clearbit/)
+[![Total Download](https://img.shields.io/hexpm/dt/ex_clearbit.svg)](https://hex.pm/packages/ex_clearbit)
+[![License](https://img.shields.io/hexpm/l/ex_clearbit.svg)](https://github.com/aef-/ex_clearbit/blob/main/LICENSE.md)
 [![Last Updated](https://img.shields.io/github/last-commit/aef-/ex_clearbit.svg)](https://github.com/aef-/ex_clearbit/commits/main)
 
 A lightweight Elixir client for [Clearbit](https://clearbit.com).
