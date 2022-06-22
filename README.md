@@ -1,5 +1,12 @@
 # ExClearbit
 
+[![Elixir CI](https://github.com/aef-/ex_clearbit/actions/workflows/elixir.yml/badge.svg)](https://github.com/aef-/ex_clearbit/actions/workflows/elixir.yml)
+[![Module Version](https://img.shields.io/hexpm/v/ex_clearbit.svg)](https://hex.pm/packages/ex_clearbit)
+[![Hex Docs](https://img.shields.io/badge/hex-docs-lightgreen.svg)](https://hexdocs.pm/ex_clearbit/)
+[![Total Download](https://img.shields.io/hexpm/dt/ex_clearbit.svg)](https://hex.pm/packages/ex_clearbit)
+[![License](https://img.shields.io/hexpm/l/ex_clearbit.svg)](https://github.com/aef-/ex_clearbit/blob/main/LICENSE.md)
+[![Last Updated](https://img.shields.io/github/last-commit/aef-/ex_clearbit.svg)](https://github.com/aef-/ex_clearbit/commits/main)
+
 A lightweight Elixir client for [Clearbit](https://clearbit.com).
 
 ## Installation
@@ -35,18 +42,3 @@ ExClearbit.configure(api_key: "YOUR API_KEY")
 
 ```iex
 iex> ExClearbit.person("alex@alexmaccaw.com")
-```
-
-## TODO
-
-1. A test suite
-2. An interface for the streaming API
-3. A way to manage callbacks for asynchronous calls
-4. Other endpoints besides the Enrichment API
-
-## CONTRIBUTING
-
-1. Fork the repo.
-2. Make your changes on a separate branch from master (always keep your master branch
-   up to date with the upstream repository).
-3. Submit a PR from your changed branch.
