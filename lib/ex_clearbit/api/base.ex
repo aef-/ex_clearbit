@@ -4,8 +4,12 @@ defmodule ExClearbit.API.Base do
   """
   alias ExClearbit.Config
 
-  @user_agent "Clearbit Elixir Client/#{ExClearbit.version}"
-  @default_headers ["Accept": "application/json", "Content-Type": "application/json", "User-Agent": @user_agent]
+  @user_agent "Clearbit Elixir Client/#{ExClearbit.version()}"
+  @default_headers [
+    Accept: "application/json",
+    "Content-Type": "application/json",
+    "User-Agent": @user_agent
+  ]
 
   @doc """
   Makes a GET request to the Clearbit API
@@ -19,7 +23,6 @@ defmodule ExClearbit.API.Base do
       {:ok, body}
     end
   end
-
 
   @doc """
   Makes a generic request to the Clearbit API
@@ -39,10 +42,9 @@ defmodule ExClearbit.API.Base do
           |> Keyword.merge(options)
           |> Keyword.merge(hackney: [basic_auth: {config[:api_key], nil}])
 
-      ExClearbit.request(method, path, body, headers, options)
+        ExClearbit.request(method, path, body, headers, options)
     end
   end
-
 
   @doc """
   Ensures that the API Key is set (or at least that the parameter list isn't empty)
@@ -55,13 +57,12 @@ defmodule ExClearbit.API.Base do
 
   def verify_params(params), do: params
 
-
   # Returns error tuple in case of errors, otherwise returns the response as-is
   defp handle_errors(%{"error" => error}) do
     {:error, %{code: String.to_atom(error["type"]), message: error["message"]}}
   end
 
   defp handle_errors(%{} = _response), do: :ok
-  defp handle_errors([_|_] = _response), do: :ok
+  defp handle_errors([_ | _] = _response), do: :ok
   defp handle_errors([] = _response), do: :ok
 end

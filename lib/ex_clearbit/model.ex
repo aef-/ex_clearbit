@@ -79,7 +79,7 @@ defmodule ExClearbit.Model.Company do
     :twitter,
     :type,
     :utc_offset
- ]
+  ]
 
   @type t :: %__MODULE__{}
   use ExConstructor
@@ -100,7 +100,7 @@ defmodule ExClearbit.Model.Prospector.Person do
     :company,
     :email,
     :verified,
-    :phone,
+    :phone
   ]
 
   @type t :: %__MODULE__{}
@@ -116,15 +116,15 @@ defmodule ExClearbit.Model.Prospector.Results do
     :page,
     :page_size,
     :total,
-    :results,
+    :results
   ]
 
   @type t :: %__MODULE__{
-    page: non_neg_integer,
-    page_size: non_neg_integer,
-    total: non_neg_integer,
-    results: list(ExClearbit.Model.Prospector.Person.t)
-  }
+          page: non_neg_integer,
+          page_size: non_neg_integer,
+          total: non_neg_integer,
+          results: list(ExClearbit.Model.Prospector.Person.t())
+        }
   use ExConstructor
 end
 
@@ -139,16 +139,16 @@ defmodule ExClearbit.Model.Reveal do
     :domain,
     :type,
     :company,
-    :geo_ip,
+    :geo_ip
   ]
 
   @type t :: %__MODULE__{
-    ip: binary,
-    fuzzy: boolean,
-    domain: binary | nil,
-    type: binary,
-    geo_ip: map,
-    company: ExClearbit.Model.Company.t | nil,
-  }
+          ip: binary,
+          fuzzy: boolean,
+          domain: binary | nil,
+          type: binary,
+          geo_ip: map,
+          company: ExClearbit.Model.Company.t() | nil
+        }
   use ExConstructor
 end
