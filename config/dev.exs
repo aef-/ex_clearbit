@@ -12,7 +12,7 @@ config :git_hooks,
     pre_push: [
       verbose: false,
       tasks: [
-        # {:cmd, "mix dialyzer"},
+        {:cmd, "mix dialyzer"},
         {:cmd, "mix test --color --exclude not_implemented"},
         {:cmd, "echo 'success!'"}
       ]
