@@ -42,11 +42,12 @@ defmodule ExClearbit.Mixfile do
   defp deps do
     [
       {:httpoison, "~> 1.3"},
-      {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
-      {:dialyxir, "~> 1.0", only: [:dev], runtime: false},
       {:poison, "~> 4.0"},
       {:exconstructor, "~> 1.1"},
-      {:ex_doc, "~> 0.19", only: [:dev]}
+      {:ex_doc, "~> 0.19", only: [:dev]},
+      {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
+      {:dialyxir, "~> 1.0", only: [:dev], runtime: false},
+      {:git_hooks, "~> 0.7.2", only: [:dev], runtime: false}
     ]
   end
 end
