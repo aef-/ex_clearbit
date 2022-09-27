@@ -24,7 +24,7 @@ defmodule ExClearbit.Mixfile do
   #
   # Type "mix help compile.app" for more information
   def application do
-    [applications: [:logger, :httpoison, :exconstructor, :poison], mod: {ExClearbit, []}]
+    [applications: [:logger, :httpoison, :exconstructor, :poison, :jason], mod: {ExClearbit, []}]
   end
 
   defp description do

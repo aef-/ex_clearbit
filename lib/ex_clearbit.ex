@@ -27,7 +27,7 @@ defmodule ExClearbit do
   end
 
   def process_response_body(body) do
-    Poison.decode!(body)
+    Jason.decode!(body)
   end
 
   @doc """

@@ -2,7 +2,7 @@ defmodule ExClearbit.Model.Person do
   @moduledoc """
     The struct for the Person data returned from Clearbit
   """
-  @derive [Poison.Encoder]
+  @derive [Jason.Encoder]
   defstruct [
     :aboutme,
     :angellist,
@@ -36,7 +36,7 @@ defmodule ExClearbit.Model.NameToDomain do
   @moduledoc """
     The struct for the NameToDomain data returned from Clearbit
   """
-  @derive [Poison.Encoder]
+  @derive [Jason.Encoder]
   defstruct [
     :domain,
     :logo,
@@ -51,7 +51,7 @@ defmodule ExClearbit.Model.Company do
   @moduledoc """
   The struct for the Company data returned from Clearbit
   """
-  @derive [Poison.Encoder]
+  @derive [Jason.Encoder]
   defstruct [
     :angel_list,
     :category,
