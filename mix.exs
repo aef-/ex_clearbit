@@ -41,7 +41,7 @@ defmodule ExClearbit.Mixfile do
 
   defp deps do
     [
-      {:httpoison, "~> 1.3"},
+      {:httpoison, "~> 2.2"},
       {:poison, "~> 4.0"},
       {:exconstructor, "~> 1.1"},
       {:ex_doc, "~> 0.19", only: [:dev]},
